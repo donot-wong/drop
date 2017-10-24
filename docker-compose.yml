@@ -6,13 +6,13 @@ services:
     container_name: nginx
     restart: always
     links:
-      - php7
+      - php7:php
     volumns:
       - ./nginx/conf:/etc/nginx/conf.d
       - ./logs:/var/log/nginx
       - ./web:/usr/share/nginx/html
     depends_on:
-      - php7:php
+      - php7
     ports:
       - 8080:80
 
