@@ -1,4 +1,4 @@
-version: 2
+version: '2'
 
 services:
   nginx:
@@ -7,7 +7,7 @@ services:
     restart: always
     links:
       - php7:php
-    volumns:
+    volumes:
       - ./nginx/conf:/etc/nginx/conf.d
       - ./logs:/var/log/nginx
       - ./web:/usr/share/nginx/html
@@ -22,7 +22,7 @@ services:
     image: php7:mongoenv
     container_name: php-fpm7.1
     restart: always
-    volumns:
+    volumes:
       - ./web:/var/www/html
     links:
       - mongodb:mongodb
@@ -36,11 +36,11 @@ services:
     container_name: mysql
     enviroment:
       - MYSQL_ROOT_PASSWORD: 123456
-    volumns:
+    volumes:
       - ./mysqldata:/var/lib/mysql
 
   mongodb:
     image: mongo:latest
     container_name: mongodb
-    volumns:
+    volumes:
       - ./mongodbdata:/var/lib/mongodb
