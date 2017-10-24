@@ -1,0 +1,46 @@
+version: 2
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    links:
+      - php7
+    volumns:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./logs:/var/log/nginx
+      - ./web:/usr/share/nginx/html
+    depends_on:
+      - php7:php
+    ports:
+      - 8080:80
+
+  php7:
+    build:
+      context: ./php7
+    image: php7:mongoenv
+    container_name: php-fpm7.1
+    restart: always
+    volumns:
+      - ./web:/var/www/html
+    links:
+      - mongodb:mongodb
+      - mysql:mysql
+    depends_on:
+      - mongodb
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    enviroment:
+      - MYSQL_ROOT_PASSWORD: 123456
+    volumns:
+      - ./mysqldata:/var/lib/mysql
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumns:
+      - ./mongodbdata:/var/lib/mongodb
