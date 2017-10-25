@@ -22,3 +22,5 @@ MongoDB是基于分布式文件存储的数据库，也就是我们常说的NoSq
 | 表字段   | 键 | 列 |
 | 主外键 | 无 |   PK、FK |
 | 扩展性 | 极高 | 无 |
+
+## 使用Docker部署php/nginx/mongodb/mysql环境
